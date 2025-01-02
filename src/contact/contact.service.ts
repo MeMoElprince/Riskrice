@@ -16,7 +16,6 @@ export class ContactService {
             data: createContactDto,
         });
         await this.emailService.sendContact(
-            'memomeme621@gmail.com',
             createContactDto,
         );
         return contact;

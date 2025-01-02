@@ -77,7 +77,7 @@ export class EmailService {
             object,
             subject,
             email: to,
-        })
+        });
         const html = pug.renderFile(fullPath, {
             name,
             object,
@@ -101,11 +101,11 @@ export class EmailService {
         }
     }
 
-    async sendContact(to: string, createContactDto: CreateContactDto) {
+    async sendContact(createContactDto: CreateContactDto) {
         await this.sendCustom(
             'contact',
             'Contact Us',
-            to,
+            'info@riskrice.com',
             'Admin',
             createContactDto,
         );
