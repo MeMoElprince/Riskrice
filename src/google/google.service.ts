@@ -14,7 +14,8 @@ export class GoogleService {
     private TOKEN_PATH = join(ROOT_PATH, 'token.json');
     private CREDENTIALS_PATH = join(ROOT_PATH, 'credentials.json');
     private SCOPES = ['https://www.googleapis.com/auth/meetings.space.created'];
-    async loadSavedCredentialsIfExist(): Promise<JSONClient> {
+
+    private async loadSavedCredentialsIfExist(): Promise<JSONClient> {
         try {
             const content = readFileSync(this.TOKEN_PATH);
             const credentials = JSON.parse(content.toString());
@@ -25,7 +26,7 @@ export class GoogleService {
         }
     }
 
-    async saveCredentials(client: OAuth2Client): Promise<void> {
+    private async saveCredentials(client: OAuth2Client): Promise<void> {
         const content = readFileSync(this.CREDENTIALS_PATH);
         const keys = JSON.parse(content.toString());
         const key = keys.installed || keys.web;
@@ -38,7 +39,7 @@ export class GoogleService {
         writeFileSync(this.TOKEN_PATH, payload);
     }
 
-    async authorize(): Promise<JSONClient> {
+    private async authorize(): Promise<JSONClient> {
         let client: any = await this.loadSavedCredentialsIfExist();
         if (client) {
             return client;
@@ -53,7 +54,7 @@ export class GoogleService {
         return client;
     }
 
-    async createSpace(authClient: JSONClient): Promise<string> {
+    private async createSpace(authClient: JSONClient): Promise<string> {
         const meetClient = new SpacesServiceClient({
             authClient: authClient,
         });
