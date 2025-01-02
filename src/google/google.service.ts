@@ -15,7 +15,7 @@ export class GoogleService {
     private CREDENTIALS_PATH = join(ROOT_PATH, 'credentials.json');
     private SCOPES = ['https://www.googleapis.com/auth/meetings.space.created'];
 
-    private async loadSavedCredentialsIfExist(): Promise<JSONClient> {
+    private async loadSavedCredentialsIfExist(): Promise<JSONClient | null> {
         try {
             const content = readFileSync(this.TOKEN_PATH);
             const credentials = JSON.parse(content.toString());
