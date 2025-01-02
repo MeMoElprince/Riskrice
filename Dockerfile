@@ -10,7 +10,7 @@ WORKDIR /app
 # Copy only the package files to install dependencies
 COPY package*.json ./
 # Install project dependencies
-RUN npm install
+RUN npm ci --force
 # Copy the rest of the application files into the container
 COPY . .
 # Generate Prisma client
