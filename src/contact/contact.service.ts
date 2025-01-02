@@ -2,15 +2,23 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PaginationDto } from 'src/global/dto/pagination.dto';
+import { EmailService } from 'src/email/email.service';
 
 @Injectable()
 export class ContactService {
-    constructor(private prismaService: PrismaService) {}
+    constructor(
+        private prismaService: PrismaService,
+        private emailService: EmailService,
+    ) {}
 
     async create(createContactDto: CreateContactDto) {
         const contact = this.prismaService.contact.create({
             data: createContactDto,
         });
+        await this.emailService.sendContact(
+            'memomeme621@gmail.com',
+            createContactDto,
+        );
         return contact;
     }
 

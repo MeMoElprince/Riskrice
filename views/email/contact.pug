@@ -1,0 +1,18 @@
+extends emailBase 
+
+
+block content 
+    p Hi #{name},
+    p A user called #{object.name} with email #{object.email} with phoneNumber #{object.phoneNumber} 🎉🙏
+    p with consultType #{object.consultType} and message #{object.message} has contacted you.
+    table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+        tbody
+            tr
+                td(align='left')
+                    table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                        tbody
+                            tr
+                                td
+                                    p(style='color: blue;') #{WELCOME}
+    p(style='color: red;') Have a good day!
+    p - Riskrice team - 
